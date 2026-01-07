@@ -1,0 +1,76 @@
+
+
+
+CREATE TABLE PriceTableEntity (
+    id INTEGER NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
+    toleranceMinutes INTEGER NOT NULL,
+    hourlyPrice REAL NOT NULL,
+    additionalPrice REAL NOT NULL
+);
+
+
+CREATE TABLE PaymentMethodEntity (
+    id INTEGER NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL
+);
+
+-- VEÍCULOS (Operação Local)
+CREATE TABLE VehicleEntity (
+    plate TEXT NOT NULL PRIMARY KEY,
+    model TEXT NOT NULL,
+    color TEXT NOT NULL,
+    checkInTime TEXT NOT NULL,
+    checkOutTime TEXT,
+    priceTableId INTEGER NOT NULL,
+    totalAmount REAL,
+    paymentMethodId INTEGER,
+    status TEXT NOT NULL,
+    FOREIGN KEY (priceTableId) REFERENCES PriceTableEntity(id)
+);
+
+
+insertPriceTable:
+INSERT OR REPLACE INTO PriceTableEntity(id, name, toleranceMinutes, hourlyPrice, additionalPrice)
+VALUES (?, ?, ?, ?, ?);
+
+getAllPriceTables:
+SELECT * FROM PriceTableEntity;
+
+deleteAllPriceTables:
+DELETE FROM PriceTableEntity;
+
+
+insertPaymentMethod:
+INSERT OR REPLACE INTO PaymentMethodEntity(id, name)
+VALUES (?, ?);
+
+getAllPaymentMethods:
+SELECT * FROM PaymentMethodEntity;
+
+deleteAllPaymentMethods:
+DELETE FROM PaymentMethodEntity;
+
+
+insertVehicle:
+INSERT OR IGNORE INTO VehicleEntity(plate, model, color, checkInTime, priceTableId, status)
+VALUES (?, ?, ?, ?, ?, 'PARKED');
+
+getVehiclesParked:
+SELECT * FROM VehicleEntity WHERE status = 'PARKED';
+
+getVehicleByPlate:
+SELECT * FROM VehicleEntity WHERE plate = ?;
+
+
+checkoutVehicle:
+UPDATE VehicleEntity
+SET checkOutTime = ?, totalAmount = ?, paymentMethodId = ?, status = 'CLOSED'
+WHERE plate = ?;
+
+
+countParkedVehicles:
+SELECT count(*) FROM VehicleEntity WHERE status = 'PARKED';
+
+deleteAllVehicles:
+DELETE FROM VehicleEntity;

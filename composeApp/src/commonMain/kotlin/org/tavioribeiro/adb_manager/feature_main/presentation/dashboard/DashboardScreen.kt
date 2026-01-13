@@ -40,6 +40,8 @@ import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import org.jetbrains.compose.resources.painterResource
+import org.koin.compose.koinInject
+import org.tavioribeiro.adb_manager.core.data.local.local_storage.LocalStorage
 import org.tavioribeiro.adb_manager.core_ui.components.buttons.IconTextButton
 import org.tavioribeiro.adb_manager.core_ui.theme.AppTheme
 import org.tavioribeiro.adb_manager.core_ui.theme.ThemeState
@@ -51,6 +53,9 @@ class DashboardScreen : Screen {
         val navigator = LocalNavigator.currentOrThrow
         val screenModel = getScreenModel<DashboardScreenModel>()
         val state by screenModel.uiState.collectAsState()
+
+        val localStorage = koinInject<LocalStorage>()
+        ThemeState.initialize(localStorage)
 
 
         /*LaunchedEffect(state.isLoggedIn) {

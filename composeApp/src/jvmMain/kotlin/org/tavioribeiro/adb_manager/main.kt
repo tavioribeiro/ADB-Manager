@@ -2,7 +2,6 @@ package org.tavioribeiro.adb_manager
 
 import adbmanager.composeapp.generated.resources.Res
 import adbmanager.composeapp.generated.resources.logo_png
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPlacement
 import androidx.compose.ui.window.application

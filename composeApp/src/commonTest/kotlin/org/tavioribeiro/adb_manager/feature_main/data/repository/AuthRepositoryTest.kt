@@ -4,7 +4,7 @@ import io.mockk.coEvery
 import io.mockk.mockk
 import io.mockk.verify
 import kotlinx.coroutines.test.runTest
-import org.tavioribeiro.adb_manager.core.data.local.session_cache.SessionCache
+import org.tavioribeiro.adb_manager.core.data.local.local_storage.LocalStorage
 import org.tavioribeiro.adb_manager.db.AppDatabase
 import org.tavioribeiro.adb_manager.feature_main.data.remote.AuthApiService
 import org.tavioribeiro.adb_manager.feature_main.data.remote.dto.LoginDataDto
@@ -17,10 +17,10 @@ import kotlin.test.assertTrue
 class AuthRepositoryTest {
 
     private val apiService = mockk<AuthApiService>()
-    private val sessionCache = mockk<SessionCache>(relaxed = true)
+    private val localStorage = mockk<LocalStorage>(relaxed = true)
     private val db = mockk<AppDatabase>(relaxed = true)
 
-    private val repository = AuthRepositoryImpl(apiService, sessionCache, db)
+    private val repository = AuthRepositoryImpl(apiService, localStorage, db)
 
     @Test
     fun `login deve salvar a sessao e retornar sucesso quando a API retornar 200`() = runTest {
@@ -42,7 +42,7 @@ class AuthRepositoryTest {
 
         assertTrue(result.isSuccess, "O main deveria ter ocorrido com sucesso")
 
-        verify { sessionCache.saveSession(any()) }
+        verify { localStorage.saveSession(any()) }
     }
 
     @Test
@@ -53,6 +53,6 @@ class AuthRepositoryTest {
 
         assertTrue(result.isFailure, "O main deveria falhar ao receber uma exceção")
 
-        verify(exactly = 0) { sessionCache.saveSession(any()) }
+        verify(exactly = 0) { localStorage.saveSession(any()) }
     }
 }

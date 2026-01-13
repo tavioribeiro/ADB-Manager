@@ -13,11 +13,11 @@ import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
-import org.tavioribeiro.adb_manager.core.data.local.session_cache.SessionCache
+import org.tavioribeiro.adb_manager.core.data.local.local_storage.LocalStorage
 
 
 object KtorClientFactory {
-    fun create(sessionCache: SessionCache): HttpClient {
+    fun create(localStorage: LocalStorage): HttpClient {
         return HttpClient {
             install(ContentNegotiation) {
                 json(Json {
@@ -36,10 +36,10 @@ object KtorClientFactory {
                 }
             }
 
-            install(Auth) {
+            /*install(Auth) {
                 bearer {
                     loadTokens {
-                        val token = sessionCache.getAccessToken()
+                        val token = localStorage.getAccessToken()
                         if (token != null) {
                             BearerTokens(accessToken = token, refreshToken = "")
                         } else {
@@ -47,7 +47,7 @@ object KtorClientFactory {
                         }
                     }
                 }
-            }
+            }*/
 
             defaultRequest {
                 //TODO("migrar pra variavel de ambiente")

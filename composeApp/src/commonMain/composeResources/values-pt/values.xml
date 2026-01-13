@@ -1,0 +1,4 @@
+<resources>
+    <string name="hello">Olá</string>
+    <string name="select_lang">Selecione o Idioma</string>
+</resources>

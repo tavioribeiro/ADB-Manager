@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidApplication)
+    //alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeHotReload)
@@ -15,16 +15,16 @@ plugins {
 val env = project.findProperty("env") as String? ?: "dev"
 
 kotlin {
-    androidTarget {
+    /*androidTarget {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
         }
-    }
+    }*/
 
     jvm()
 
     sourceSets {
-        androidMain.dependencies {
+        /*androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
 
@@ -33,7 +33,7 @@ kotlin {
             implementation(libs.ktor.client.okhttp)
             implementation(libs.sqlDelight.android)
 
-        }
+        }*/
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -95,7 +95,7 @@ kotlin {
 }
 
 
-android {
+/*android {
     namespace = "org.tavioribeiro.adb_manager"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
@@ -129,7 +129,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-}
+}*/
 
 sqldelight {
     databases {
@@ -140,7 +140,7 @@ sqldelight {
 }
 
 dependencies {
-    debugImplementation(compose.uiTooling)
+    //debugImplementation(compose.uiTooling)
 }
 
 compose.desktop {

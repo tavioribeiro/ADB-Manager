@@ -1,4 +1,4 @@
-package org.tavioribeiro.adb_manager.feature_auth.data.repository
+package org.tavioribeiro.adb_manager.feature_main.data.repository
 
 import io.ktor.client.call.body
 import io.ktor.client.plugins.ClientRequestException
@@ -10,10 +10,10 @@ import org.tavioribeiro.adb_manager.core.data.local.session_cache.SessionCache
 import org.tavioribeiro.adb_manager.core.data.remote.dto.ErrorResponse400
 import org.tavioribeiro.adb_manager.core.data.remote.dto.ErrorResponse422
 import org.tavioribeiro.adb_manager.db.AppDatabase
-import org.tavioribeiro.adb_manager.feature_auth.data.mappers.toDomain
-import org.tavioribeiro.adb_manager.feature_auth.data.remote.AuthApiService
-import org.tavioribeiro.adb_manager.feature_auth.domain.model.UserSession
-import org.tavioribeiro.adb_manager.feature_auth.domain.repository.AuthRepository
+import org.tavioribeiro.adb_manager.feature_main.data.mappers.toDomain
+import org.tavioribeiro.adb_manager.feature_main.data.remote.AuthApiService
+import org.tavioribeiro.adb_manager.feature_main.domain.model.UserSession
+import org.tavioribeiro.adb_manager.feature_main.domain.repository.AuthRepository
 import kotlin.time.ExperimentalTime
 
 class AuthRepositoryImpl(

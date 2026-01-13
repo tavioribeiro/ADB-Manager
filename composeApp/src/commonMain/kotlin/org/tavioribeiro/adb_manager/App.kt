@@ -4,8 +4,8 @@ import androidx.compose.runtime.*
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.transitions.SlideTransition
 import org.tavioribeiro.adb_manager.core_ui.theme.MyAppTheme
-import org.tavioribeiro.adb_manager.feature_auth.domain.repository.AuthRepository
-import org.tavioribeiro.adb_manager.feature_auth.presentation.login.LoginScreen
+import org.tavioribeiro.adb_manager.feature_main.domain.repository.AuthRepository
+import org.tavioribeiro.adb_manager.feature_main.presentation.main.MainScreen
 import org.tavioribeiro.adb_manager.feature_parking.presentation.dashboard.DashboardScreen
 import org.koin.compose.koinInject
 
@@ -18,7 +18,7 @@ fun App() {
         val initialScreen = if (authRepository.getCurrentSession() != null) {
             DashboardScreen()
         } else {
-            LoginScreen()
+            MainScreen()
         }
 
         Navigator(initialScreen) { navigator ->

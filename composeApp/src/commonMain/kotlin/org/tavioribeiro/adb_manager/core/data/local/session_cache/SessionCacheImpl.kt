@@ -1,7 +1,7 @@
 package org.tavioribeiro.adb_manager.core.data.local.session_cache
 
 import com.russhwolf.settings.Settings
-import org.tavioribeiro.adb_manager.feature_auth.domain.model.UserSession
+import org.tavioribeiro.adb_manager.feature_main.domain.model.UserSession
 
 class SessionCacheImpl(
     private val settings: Settings

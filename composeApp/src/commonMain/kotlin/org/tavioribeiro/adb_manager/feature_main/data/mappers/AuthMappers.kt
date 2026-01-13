@@ -1,7 +1,7 @@
-package org.tavioribeiro.adb_manager.feature_auth.data.mappers
+package org.tavioribeiro.adb_manager.feature_main.data.mappers
 
-import org.tavioribeiro.adb_manager.feature_auth.data.remote.dto.LoginResponseDto
-import org.tavioribeiro.adb_manager.feature_auth.domain.model.UserSession
+import org.tavioribeiro.adb_manager.feature_main.data.remote.dto.LoginResponseDto
+import org.tavioribeiro.adb_manager.feature_main.domain.model.UserSession
 
 
 fun LoginResponseDto.toDomain(): UserSession {

@@ -1,6 +1,6 @@
-package org.tavioribeiro.adb_manager.feature_auth.domain.repository
+package org.tavioribeiro.adb_manager.feature_main.domain.repository
 
-import org.tavioribeiro.adb_manager.feature_auth.domain.model.UserSession
+import org.tavioribeiro.adb_manager.feature_main.domain.model.UserSession
 
 interface AuthRepository {
     suspend fun login(email: String, password: String): Result<UserSession>

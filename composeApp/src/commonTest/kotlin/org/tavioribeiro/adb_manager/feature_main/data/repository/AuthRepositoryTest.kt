@@ -1,4 +1,4 @@
-package org.tavioribeiro.adb_manager.feature_auth.data.repository
+package org.tavioribeiro.adb_manager.feature_main.data.repository
 
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -6,11 +6,11 @@ import io.mockk.verify
 import kotlinx.coroutines.test.runTest
 import org.tavioribeiro.adb_manager.core.data.local.session_cache.SessionCache
 import org.tavioribeiro.adb_manager.db.AppDatabase
-import org.tavioribeiro.adb_manager.feature_auth.data.remote.AuthApiService
-import org.tavioribeiro.adb_manager.feature_auth.data.remote.dto.LoginDataDto
-import org.tavioribeiro.adb_manager.feature_auth.data.remote.dto.LoginResponseDto
-import org.tavioribeiro.adb_manager.feature_auth.data.remote.dto.SessionDto
-import org.tavioribeiro.adb_manager.feature_auth.data.remote.dto.UserDto
+import org.tavioribeiro.adb_manager.feature_main.data.remote.AuthApiService
+import org.tavioribeiro.adb_manager.feature_main.data.remote.dto.LoginDataDto
+import org.tavioribeiro.adb_manager.feature_main.data.remote.dto.LoginResponseDto
+import org.tavioribeiro.adb_manager.feature_main.data.remote.dto.SessionDto
+import org.tavioribeiro.adb_manager.feature_main.data.remote.dto.UserDto
 import kotlin.test.Test
 import kotlin.test.assertTrue
 
@@ -40,7 +40,7 @@ class AuthRepositoryTest {
 
         val result = repository.login(email, password)
 
-        assertTrue(result.isSuccess, "O login deveria ter ocorrido com sucesso")
+        assertTrue(result.isSuccess, "O main deveria ter ocorrido com sucesso")
 
         verify { sessionCache.saveSession(any()) }
     }
@@ -51,7 +51,7 @@ class AuthRepositoryTest {
 
         val result = repository.login("email", "senha")
 
-        assertTrue(result.isFailure, "O login deveria falhar ao receber uma exceção")
+        assertTrue(result.isFailure, "O main deveria falhar ao receber uma exceção")
 
         verify(exactly = 0) { sessionCache.saveSession(any()) }
     }

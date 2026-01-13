@@ -1,4 +1,4 @@
-package org.tavioribeiro.adb_manager.feature_auth.data.remote.dto
+package org.tavioribeiro.adb_manager.feature_main.data.remote.dto
 
 
 import kotlinx.serialization.Serializable

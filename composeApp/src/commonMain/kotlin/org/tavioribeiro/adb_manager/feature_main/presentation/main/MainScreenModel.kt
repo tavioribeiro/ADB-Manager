@@ -1,4 +1,4 @@
-package org.tavioribeiro.adb_manager.feature_auth.presentation.login
+package org.tavioribeiro.adb_manager.feature_main.presentation.main
 
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 import org.tavioribeiro.adb_manager.core_ui.components.toast.model.ToastType
 import org.tavioribeiro.adb_manager.core_ui.components.toast.model.ToastUiModel
 
-import org.tavioribeiro.adb_manager.feature_auth.domain.repository.AuthRepository
+import org.tavioribeiro.adb_manager.feature_main.domain.repository.AuthRepository
 
 
 data class LoginUiState(

@@ -1,11 +1,11 @@
-package org.tavioribeiro.adb_manager.feature_auth.data.remote
+package org.tavioribeiro.adb_manager.feature_main.data.remote
 
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.forms.submitForm
 import io.ktor.http.Parameters
-import org.tavioribeiro.adb_manager.feature_auth.data.remote.dto.CloseSessionResponseDto
-import org.tavioribeiro.adb_manager.feature_auth.data.remote.dto.LoginResponseDto
+import org.tavioribeiro.adb_manager.feature_main.data.remote.dto.CloseSessionResponseDto
+import org.tavioribeiro.adb_manager.feature_main.data.remote.dto.LoginResponseDto
 
 class AuthApiServiceImpl(
     private val httpClient: HttpClient
@@ -13,7 +13,7 @@ class AuthApiServiceImpl(
 
     override suspend fun login(email: String, password: String): LoginResponseDto {
         return httpClient.submitForm(
-            url = "user/login",
+            url = "user/main",
             formParameters = Parameters.Companion.build {
                 append("email", email)
                 append("password", password)

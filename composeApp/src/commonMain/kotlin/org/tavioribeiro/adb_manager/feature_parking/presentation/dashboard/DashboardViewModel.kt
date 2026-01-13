@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.tavioribeiro.adb_manager.core_ui.components.toast.model.ToastType
 import org.tavioribeiro.adb_manager.core_ui.components.toast.model.ToastUiModel
-import org.tavioribeiro.adb_manager.feature_auth.domain.repository.AuthRepository
+import org.tavioribeiro.adb_manager.feature_main.domain.repository.AuthRepository
 import org.tavioribeiro.adb_manager.feature_parking.domain.repository.parking.ParkingRepository
 import org.tavioribeiro.adb_manager.feature_parking.domain.repository.sync.SyncRepository
 

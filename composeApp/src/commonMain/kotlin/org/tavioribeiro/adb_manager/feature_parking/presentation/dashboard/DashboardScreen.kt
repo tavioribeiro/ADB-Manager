@@ -25,7 +25,7 @@ import org.tavioribeiro.adb_manager.core_ui.components.buttons.IconTextButton
 import org.tavioribeiro.adb_manager.core_ui.components.toast.CustomToastView
 import org.tavioribeiro.adb_manager.core_ui.theme.AppTheme
 import org.tavioribeiro.adb_manager.core_ui.theme.ThemeState
-import org.tavioribeiro.adb_manager.feature_auth.presentation.login.LoginScreen
+import org.tavioribeiro.adb_manager.feature_main.presentation.main.MainScreen
 import org.tavioribeiro.adb_manager.feature_parking.presentation.entry.EntryScreen
 import org.tavioribeiro.adb_manager.feature_parking.presentation.vehicle_list.VehicleListScreen
 
@@ -80,7 +80,7 @@ class DashboardScreen : Screen {
                         IconButton(
                             onClick = {
                                 viewModel.logout()
-                                navigator.replaceAll(LoginScreen())
+                                navigator.replaceAll(MainScreen())
                             }
                         ) {
                             Icon(

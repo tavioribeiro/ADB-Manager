@@ -1,4 +1,4 @@
-package org.tavioribeiro.adb_manager.feature_auth.domain.model
+package org.tavioribeiro.adb_manager.feature_main.domain.model
 
 import kotlinx.serialization.Serializable
 

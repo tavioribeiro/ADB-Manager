@@ -4,6 +4,7 @@ import adbmanager.composeapp.generated.resources.Res
 import adbmanager.composeapp.generated.resources.logo_png
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
+import androidx.compose.ui.window.WindowPlacement
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
 import com.russhwolf.settings.PreferencesSettings
@@ -30,9 +31,11 @@ fun main() = application {
     )
 
     val windowInitialState = rememberWindowState(
-        width = 600.dp,
-        height = 804.dp
+        placement = WindowPlacement.Maximized
+        //width = 600.dp,
+        //height = 804.dp
     )
+
 
     Window(
         onCloseRequest = ::exitApplication,
@@ -40,7 +43,7 @@ fun main() = application {
         icon = painterResource(Res.drawable.logo_png),
         state = windowInitialState,
     ) {
-        window.minimumSize = Dimension(903, 804)
+        window.minimumSize = Dimension(1500, 700)
         App()
     }
 }

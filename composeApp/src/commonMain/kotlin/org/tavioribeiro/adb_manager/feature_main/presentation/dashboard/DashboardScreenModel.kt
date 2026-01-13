@@ -1,4 +1,4 @@
-package org.tavioribeiro.adb_manager.feature_main.presentation.main
+package org.tavioribeiro.adb_manager.feature_main.presentation.dashboard
 
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
@@ -12,17 +12,15 @@ import org.tavioribeiro.adb_manager.core_ui.components.toast.model.ToastUiModel
 import org.tavioribeiro.adb_manager.feature_main.domain.repository.AuthRepository
 
 
-data class LoginUiState(
+data class DashboardUiState(
     val isLoading: Boolean = false,
     val toast: ToastUiModel? = null,
     val isLoggedIn: Boolean = false
 )
 
-class LoginScreenModel(
-    private val authRepository: AuthRepository
-) : ScreenModel {
+class DashboardScreenModel() : ScreenModel {
 
-    private val _uiState = MutableStateFlow(LoginUiState())
+    private val _uiState = MutableStateFlow(DashboardUiState())
     val uiState = _uiState.asStateFlow()
 
     fun login(email: String, pass: String) {
@@ -36,20 +34,7 @@ class LoginScreenModel(
         screenModelScope.launch {
             _uiState.update { it.copy(isLoading = true, toast = null) }
 
-            authRepository.login(email, pass)
-                .onSuccess {
-                    _uiState.update { state ->
-                        state.copy(isLoading = false, isLoggedIn = true)
-                    }
-                }
-                .onFailure { error ->
-                    _uiState.update { state ->
-                        state.copy(
-                            isLoading = false,
-                            toast = ToastUiModel("Falha no Login", error.message ?: "Erro desconhecido", ToastType.ERROR)
-                        )
-                    }
-                }
+
         }
     }
 

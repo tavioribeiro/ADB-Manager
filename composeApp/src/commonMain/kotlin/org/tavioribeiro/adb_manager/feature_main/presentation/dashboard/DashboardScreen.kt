@@ -1,4 +1,4 @@
-package org.tavioribeiro.adb_manager.feature_main.presentation.main
+package org.tavioribeiro.adb_manager.feature_main.presentation.dashboard
 
 import adbmanager.composeapp.generated.resources.Res
 import adbmanager.composeapp.generated.resources.icon_routine
@@ -26,7 +26,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -44,26 +43,21 @@ import org.jetbrains.compose.resources.painterResource
 import org.tavioribeiro.adb_manager.core_ui.components.buttons.IconTextButton
 import org.tavioribeiro.adb_manager.core_ui.theme.AppTheme
 import org.tavioribeiro.adb_manager.core_ui.theme.ThemeState
-import org.tavioribeiro.adb_manager.feature_parking.presentation.dashboard.DashboardScreen
 
-class MainScreen : Screen {
+class DashboardScreen : Screen {
 
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        val screenModel = getScreenModel<LoginScreenModel>()
+        val screenModel = getScreenModel<DashboardScreenModel>()
         val state by screenModel.uiState.collectAsState()
 
-        // Estados locais para os inputs
-        var email by remember { mutableStateOf("") }
-        var password by remember { mutableStateOf("") }
 
-
-        LaunchedEffect(state.isLoggedIn) {
+        /*LaunchedEffect(state.isLoggedIn) {
             if (state.isLoggedIn) {
                 navigator.replaceAll(DashboardScreen())
             }
-        }
+        }*/
 
         var selectedButton by remember { mutableStateOf("Commits") }
 
@@ -96,7 +90,7 @@ class MainScreen : Screen {
                     )
 
                     Text(
-                        text = "Commitic",
+                        text = "ADB Manager",
                         color = AppTheme.colors.onColor1,
                         style = MaterialTheme.typography.headlineSmall,
                         modifier = Modifier.padding(start = 8.dp)

@@ -4,22 +4,21 @@ import androidx.compose.runtime.*
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.transitions.SlideTransition
 import org.tavioribeiro.adb_manager.core_ui.theme.MyAppTheme
-import org.tavioribeiro.adb_manager.feature_main.domain.repository.AuthRepository
-import org.tavioribeiro.adb_manager.feature_main.presentation.main.MainScreen
-import org.tavioribeiro.adb_manager.feature_parking.presentation.dashboard.DashboardScreen
-import org.koin.compose.koinInject
+import org.tavioribeiro.adb_manager.feature_main.presentation.dashboard.DashboardScreen
 
 
 @Composable
 fun App() {
     MyAppTheme {
-        val authRepository = koinInject<AuthRepository>()
+        /*val authRepository = koinInject<AuthRepository>()
 
         val initialScreen = if (authRepository.getCurrentSession() != null) {
             DashboardScreen()
         } else {
             MainScreen()
-        }
+        }*/
+
+        val initialScreen = DashboardScreen()
 
         Navigator(initialScreen) { navigator ->
             SlideTransition(navigator)

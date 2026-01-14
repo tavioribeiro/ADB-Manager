@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -94,11 +95,26 @@ class DashboardScreen : Screen {
                         modifier = Modifier.size(32.dp)
                     )
 
-                    Text(
-                        text = "ADB Manager",
-                        color = AppTheme.colors.onColor1,
-                        style = MaterialTheme.typography.headlineSmall,
-                        modifier = Modifier.padding(start = 8.dp)
+                    Column (){
+                        Text(
+                            text = "ADB Manager",
+                            color = AppTheme.colors.onColor1,
+                            style = MaterialTheme.typography.headlineSmall,
+                            modifier = Modifier.padding(start = 8.dp)
+                        )
+
+                        Text(
+                            text = "V:1.0",
+                            color = AppTheme.colors.color5,
+                            style = MaterialTheme.typography.labelSmall,
+                            modifier = Modifier.padding(start = 8.dp)
+                        )
+                    }
+
+                    VerticalDivider(
+                        modifier = Modifier.padding(horizontal = 80.dp),
+                        thickness = 1.dp,
+                        color = AppTheme.colors.color4
                     )
                 }
 

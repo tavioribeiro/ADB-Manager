@@ -5,7 +5,7 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import java.util.concurrent.TimeUnit
 
-actual class ConsoleDataSource actual constructor() {
+actual class ConsoleProvider actual constructor() {
 
     actual suspend fun execute(command: String, path: String): Result<String> = withContext(Dispatchers.IO) {
         try {

@@ -5,6 +5,7 @@ import org.tavioribeiro.adb_manager.feature_main.di.dashboardModule
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
 import org.koin.dsl.KoinAppDeclaration
+import org.tavioribeiro.adb_manager.core_ui.di.coreUiModule
 
 fun initKoin(appDeclaration: KoinAppDeclaration = {}, platformModule: Module) {
     startKoin {
@@ -12,6 +13,7 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}, platformModule: Module) {
         modules(
             platformModule,
             coreModule,
+            coreUiModule,
             dashboardModule
         )
     }

@@ -52,7 +52,7 @@ class DashboardScreen : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        val screenModel = getScreenModel<DashboardScreenModel>()
+        val screenModel = getScreenModel<DashboardScreenViewModel>()
         val state by screenModel.uiState.collectAsState()
 
         val localStorage = koinInject<LocalStorage>()

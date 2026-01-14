@@ -1,6 +1,12 @@
 package org.tavioribeiro.adb_manager.feature_main.domain.model
 
 
+data class AdbDeviceUi(
+    val serial: String,
+    val model: String,
+    val state: String,
+    val isOnline: Boolean
+)
 
 data class CpuUiData(
     val usagePercent: Int,

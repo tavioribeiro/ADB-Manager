@@ -27,6 +27,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -52,18 +53,50 @@ class DashboardScreen : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        val screenModel = getScreenModel<DashboardScreenViewModel>()
-        val state by screenModel.uiState.collectAsState()
+        val screenViewModel = getScreenModel<DashboardScreenViewModel>()
+        val state by screenViewModel.uiState.collectAsState()
 
         val localStorage = koinInject<LocalStorage>()
         ThemeState.initialize(localStorage)
 
+        // =====================================================================
+        // 1. GATILHO INICIAL: Buscar dispositivos ao abrir a tela
+        // =====================================================================
+        LaunchedEffect(Unit) {
+            println(">>> [VIEW] Tela Iniciada: Buscando dispositivos...")
+            screenViewModel.refreshDevices()
+        }
 
-        /*LaunchedEffect(state.isLoggedIn) {
-            if (state.isLoggedIn) {
-                navigator.replaceAll(DashboardScreen())
+        // =====================================================================
+        // 2. LOGGER: Monitora o estado e imprime no console quando os dados chegam
+        // =====================================================================
+        LaunchedEffect(state) {
+            // Log de Erro
+            if (state.error != null) {
+                println(">>> [VIEW ERROR] Ocorreu um erro: ${state.error}")
             }
-        }*/
+
+            // Log de Dispositivos encontrados
+            if (state.devices.isNotEmpty()) {
+                println(">>> [VIEW DATA] Dispositivos na lista: ${state.devices.size}")
+                state.devices.forEach { device ->
+                    println("       -> Modelo: ${device.model} | Serial: ${device.serial} | Status: ${device.state}")
+                }
+            }
+
+            // Log de Dados do Dashboard (Só imprime se não for nulo)
+            state.selectedDeviceSerial?.let { serial ->
+                if (!state.isLoading && state.cpu != null) {
+                    println("\n========== DADOS RECEBIDOS DO DEVICE ($serial) ==========")
+                    println("CPU: ${state.cpu?.usagePercent}% de uso (${state.cpu?.activeCores}/${state.cpu?.totalCores} cores)")
+                    println("RAM: ${state.memory?.usagePercent}% de uso (${state.memory?.usedGb}/${state.memory?.totalGb} GB)")
+                    println("STORAGE: ${state.storage?.usagePercent}% ocupado (${state.storage?.freeGb} GB livres)")
+                    println("SYSTEM: Android ${state.systemInfo?.androidVersion} | Res: ${state.systemInfo?.resolution}")
+                    println("=========================================================\n")
+                }
+            }
+        }
+        // =====================================================================
 
         var selectedButton by remember { mutableStateOf("Commits") }
 
@@ -122,6 +155,8 @@ class DashboardScreen : Screen {
                     text = "Alterar Tema",
                     onClick = {
                         ThemeState.toggleTheme()
+                        // Opcional: Recarregar dispositivos ao clicar aqui para testar manualmente
+                        // screenViewModel.refreshDevices()
                     },
                     icon = painterResource(Res.drawable.icon_routine),
                     modifier = Modifier.padding(16.dp)
@@ -141,43 +176,7 @@ class DashboardScreen : Screen {
                     horizontalArrangement = Arrangement.Start,
                     modifier = Modifier.fillMaxWidth()
                 ) {
-/*
-                UnderlineButton(
-                    text = "Commits",
-                    icon = painterResource(Res.drawable.icon_commit),
-                    isSelected = (selectedButton == "Commits"),
-                    onClick = { selectedButton = "Commits" }
-                )
-
-                UnderlineButton(
-                    text = "Pull Request",
-                    icon = painterResource(Res.drawable.icon_merge),
-                    isSelected = (selectedButton == "Pull Request"),
-                    onClick = { selectedButton = "Pull Request" }
-                )
-
-                UnderlineButton(
-                    text = "Projetos",
-                    icon = painterResource(Res.drawable.icon_folder),
-                    isSelected = (selectedButton == "Projetos"),
-                    onClick = { selectedButton = "Projetos" }
-                )
-
-                UnderlineButton(
-                    text = "Modelos",
-                    icon = painterResource(Res.drawable.icon_robot),
-                    isSelected = (selectedButton == "Modelos"),
-                    onClick = { selectedButton = "Modelos" }
-                )
-*/
-
-
-                    /*UnderlineButton(
-                        text = "Histórico",
-                        icon = painterResource(Res.drawable.icon_history),
-                        isSelected = (selectedButton == "Histórico"),
-                        onClick = { selectedButton = "Histórico" }
-                    )*/
+                    // Botões de aba comentados no seu código original...
                 }
 
                 Box(modifier = Modifier
@@ -188,25 +187,17 @@ class DashboardScreen : Screen {
 
                 Spacer(modifier = Modifier.height(32.dp))
 
-
                 AnimatedContent(
                     targetState = selectedButton,
                     modifier = Modifier.fillMaxWidth(),
                     transitionSpec = {
                         val exit = fadeOut(animationSpec = tween(300))
-
                         val enter = fadeIn(animationSpec = tween(durationMillis = 300, delayMillis = 300))
-
                         enter togetherWith exit
                     },
                     label = "TabContentAnimation"
                 ){ targetState ->
-                    /*when (targetState) {
-                        "Commits" -> CommitsTab()
-                        "Pull Request" -> PullRequestTab()
-                        "Projetos" -> ProjectsTab()
-                        "Modelos" -> LlmsTab()
-                    }*/
+                    // Conteúdo das abas...
                 }
             }
         }
